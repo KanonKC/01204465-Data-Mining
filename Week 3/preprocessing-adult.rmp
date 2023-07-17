@@ -66,7 +66,7 @@
         <parameter key="type_of_value" value="binominal␞non-binominal"/>
         <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
       </operator>
-      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Numerical" width="90" x="648" y="544">
+      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Numerical" width="90" x="514" y="544">
         <parameter key="type" value="include attributes"/>
         <parameter key="attribute_filter_type" value="type(s) of values"/>
         <parameter key="select_attribute" value=""/>
@@ -74,7 +74,8 @@
         <parameter key="type_of_value" value="integer"/>
         <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
       </operator>
-      <operator activated="true" class="concurrency:loop_attributes" compatibility="10.1.003" expanded="true" height="82" name="Loop Attributes (2)" width="90" x="849" y="544">
+      <operator activated="true" class="multiply" compatibility="10.1.003" expanded="true" height="103" name="Multiply (2)" width="90" x="648" y="544"/>
+      <operator activated="true" class="concurrency:loop_attributes" compatibility="10.1.003" expanded="true" height="82" name="Loop Attributes (2)" width="90" x="916" y="595">
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value=""/>
@@ -91,7 +92,7 @@
         <parameter key="reuse_results" value="false"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="aggregate" compatibility="10.1.003" expanded="true" height="82" name="Aggregate (2)" width="90" x="246" y="34">
+          <operator activated="true" class="aggregate" compatibility="10.1.003" expanded="true" height="82" name="Aggregate (2)" width="90" x="514" y="34">
             <parameter key="use_default_aggregation" value="false"/>
             <parameter key="attribute_filter_type" value="all"/>
             <parameter key="attribute" value=""/>
@@ -109,7 +110,7 @@
             <list key="aggregation_attributes">
               <parameter key="%{loop_attribute}" value="median"/>
             </list>
-            <parameter key="group_by_attributes" value="%{loop_attribute}"/>
+            <parameter key="group_by_attributes" value=""/>
             <parameter key="count_all_combinations" value="false"/>
             <parameter key="only_distinct" value="false"/>
             <parameter key="ignore_missings" value="true"/>
@@ -122,7 +123,6 @@
           <portSpacing port="sink_output 2" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="multiply" compatibility="10.1.003" expanded="true" height="82" name="Multiply (2)" width="90" x="648" y="136"/>
       <operator activated="true" class="concurrency:loop_attributes" compatibility="10.1.003" expanded="true" height="82" name="Loop Attributes" width="90" x="782" y="34">
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -176,15 +176,17 @@
       <connect from_op="Set Role" from_port="example set output" to_op="Multiply" to_port="input"/>
       <connect from_op="Multiply" from_port="output 1" to_op="Select Categorical" to_port="example set input"/>
       <connect from_op="Multiply" from_port="output 2" to_op="Select Numerical" to_port="example set input"/>
-      <connect from_op="Select Categorical" from_port="example set output" to_op="Multiply (2)" to_port="input"/>
-      <connect from_op="Select Numerical" from_port="example set output" to_op="Loop Attributes (2)" to_port="input 1"/>
-      <connect from_op="Loop Attributes (2)" from_port="output 1" to_port="result 2"/>
-      <connect from_op="Multiply (2)" from_port="output 1" to_op="Loop Attributes" to_port="input 1"/>
+      <connect from_op="Select Categorical" from_port="example set output" to_op="Loop Attributes" to_port="input 1"/>
+      <connect from_op="Select Numerical" from_port="example set output" to_op="Multiply (2)" to_port="input"/>
+      <connect from_op="Multiply (2)" from_port="output 1" to_port="result 2"/>
+      <connect from_op="Multiply (2)" from_port="output 2" to_op="Loop Attributes (2)" to_port="input 1"/>
+      <connect from_op="Loop Attributes (2)" from_port="output 1" to_port="result 3"/>
       <connect from_op="Loop Attributes" from_port="output 1" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
       <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
     </process>
   </operator>
 </process>
