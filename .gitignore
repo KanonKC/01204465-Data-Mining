@@ -1,7 +1,7 @@
 .vscode/
 
 dumps/*
-*.png
+# *.png
 
 *.xlsx
 *.csv
