@@ -5,3 +5,6 @@ dumps/*
 
 *.xlsx
 *.csv
+*.xls
+*.rar
+*.rmhdf5table
