@@ -4,7 +4,7 @@ dumps/*
 # *.png
 
 *.xlsx
-*.csv
+# *.csv
 *.xls
 *.rar
 *.rmhdf5table
