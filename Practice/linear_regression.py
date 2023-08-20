@@ -17,6 +17,11 @@ def getLinearEquation(data:[tuple]):
     m = up/down
     c = (Ey/n) - m*(Ex/n)
 
+    print(Exy,
+Ex ,
+Ey ,
+Ex2,m)
+
     return m,c
 
 datasets = [
@@ -28,5 +33,29 @@ datasets = [
     (13,11),
 ]
 
-m,c = getLinearEquation(datasets)
+datasets2 = [
+    (1,2),
+    (2,4),
+    (3,6),
+    (4,8),
+    (5,10),
+    (6,12),
+]
+
+datasets3 = [
+    (72,84),
+    (50,63),
+    (81,77),
+    (74,78),
+    (94,90),
+    (86,75),
+    (59,49),
+    (83,79),
+    (65,77),
+    (33,52),
+    (88,74),
+    (81,90),
+]
+
+m,c = getLinearEquation(datasets3)
 print(f"y = {m:.3f}x + {c:.3f}")

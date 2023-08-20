@@ -13,7 +13,7 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve BostonHousing_Train" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="BostonHousing_Train"/>
+        <parameter key="repository_entry" value="//Local Repository/01204465-DataMining/Week 6 - Linear Regression/BostonHousing_Train"/>
       </operator>
       <operator activated="true" class="blending:set_role" compatibility="10.1.003" expanded="true" height="82" name="Set Role" width="90" x="179" y="34">
         <list key="set_roles">
@@ -39,7 +39,7 @@
         <parameter key="ridge" value="1.0E-8"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve BostonHousing_New" width="90" x="313" y="187">
-        <parameter key="repository_entry" value="BostonHousing_New"/>
+        <parameter key="repository_entry" value="//Local Repository/01204465-DataMining/Week 6 - Linear Regression/BostonHousing_New"/>
       </operator>
       <operator activated="true" class="numerical_to_real" compatibility="10.1.003" expanded="true" height="82" name="Numerical to Real" width="90" x="447" y="187">
         <parameter key="attribute_filter_type" value="single"/>
