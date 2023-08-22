@@ -3,8 +3,8 @@
 dumps/*
 # *.png
 
-*.xlsx
-*.csv
+# *.xlsx
+# *.csv
 *.xls
 *.rar
 *.xml
