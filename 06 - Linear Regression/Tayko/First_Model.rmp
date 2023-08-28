@@ -71,7 +71,7 @@
         <parameter key="select_subset" value="Address_is_res␞Freq␞Gender=male␞last_update_days_ago␞US␞Web order␞Spending"/>
         <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
       </operator>
-      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes (3)" width="90" x="849" y="34">
+      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes (3)" width="90" x="916" y="34">
         <parameter key="type" value="include attributes"/>
         <parameter key="attribute_filter_type" value="a subset"/>
         <parameter key="select_attribute" value=""/>

@@ -12,11 +12,11 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve PRODUCT_SALE" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/01204465-Data-Mining/07 - Association Rules/In-Class/resources/PRODUCT_SALE"/>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve PRODUCT_SALE" width="90" x="45" y="85">
+        <parameter key="repository_entry" value="resources/PRODUCT_SALE"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve STOCKNAME" width="90" x="45" y="238">
-        <parameter key="repository_entry" value="//Local Repository/01204465-Data-Mining/07 - Association Rules/In-Class/resources/STOCKNAME"/>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve STOCKNAME" width="90" x="45" y="187">
+        <parameter key="repository_entry" value="resources/STOCKNAME"/>
       </operator>
       <operator activated="true" class="concurrency:join" compatibility="10.1.003" expanded="true" height="82" name="Join" width="90" x="179" y="136">
         <parameter key="remove_double_attributes" value="true"/>

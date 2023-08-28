@@ -41,7 +41,7 @@
         <parameter key="type" value="include attributes"/>
         <parameter key="attribute_filter_type" value="a subset"/>
         <parameter key="select_attribute" value=""/>
-        <parameter key="select_subset" value="Address_is_res␞Freq␞Gender=male␞last_update_days_ago␞Partition␞US␞Web order␞1st_update_days_ago␞Purchase␞source_a␞source_b␞source_c␞source_d␞source_e␞source_h␞source_m␞source_o␞source_p␞source_r␞source_s␞source_t␞source_u␞source_w␞source_x␞Spending"/>
+        <parameter key="select_subset" value="Address_is_res␞Freq␞Gender=male␞last_update_days_ago␞US␞Web order␞Partition"/>
         <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
       </operator>
       <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Train Set" width="90" x="715" y="34">
@@ -54,7 +54,8 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Test Set" width="90" x="849" y="187">
+      <operator activated="true" class="multiply" compatibility="10.1.003" expanded="true" height="103" name="Multiply" width="90" x="849" y="34"/>
+      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Test Set" width="90" x="715" y="187">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -64,21 +65,14 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes (2)" width="90" x="1050" y="187">
+      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes (3)" width="90" x="1117" y="34">
         <parameter key="type" value="include attributes"/>
         <parameter key="attribute_filter_type" value="a subset"/>
         <parameter key="select_attribute" value=""/>
-        <parameter key="select_subset" value="Address_is_res␞Freq␞last_update_days_ago"/>
+        <parameter key="select_subset" value="Address_is_res␞Freq␞Gender=male␞last_update_days_ago␞US␞Web order␞Spending"/>
         <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
       </operator>
-      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes (3)" width="90" x="916" y="34">
-        <parameter key="type" value="include attributes"/>
-        <parameter key="attribute_filter_type" value="a subset"/>
-        <parameter key="select_attribute" value=""/>
-        <parameter key="select_subset" value="Address_is_res␞Freq␞last_update_days_ago"/>
-        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
-      </operator>
-      <operator activated="true" class="linear_regression" compatibility="10.1.003" expanded="true" height="103" name="Linear Regression" width="90" x="1050" y="34">
+      <operator activated="true" class="linear_regression" compatibility="10.1.003" expanded="true" height="103" name="Linear Regression" width="90" x="1251" y="34">
         <parameter key="feature_selection" value="none"/>
         <parameter key="alpha" value="0.05"/>
         <parameter key="max_iterations" value="10"/>
@@ -89,10 +83,64 @@
         <parameter key="use_bias" value="true"/>
         <parameter key="ridge" value="1.0E-8"/>
       </operator>
-      <operator activated="true" class="apply_model" compatibility="10.1.003" expanded="true" height="82" name="Apply Model" width="90" x="1251" y="85">
+      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes (5)" width="90" x="1117" y="442">
+        <parameter key="type" value="include attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="Address_is_res␞Freq␞last_update_days_ago"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="linear_regression" compatibility="10.1.003" expanded="true" height="103" name="Linear Regression (2)" width="90" x="1251" y="442">
+        <parameter key="feature_selection" value="none"/>
+        <parameter key="alpha" value="0.05"/>
+        <parameter key="max_iterations" value="10"/>
+        <parameter key="forward_alpha" value="0.05"/>
+        <parameter key="backward_alpha" value="0.05"/>
+        <parameter key="eliminate_colinear_features" value="false"/>
+        <parameter key="min_tolerance" value="0.05"/>
+        <parameter key="use_bias" value="true"/>
+        <parameter key="ridge" value="1.0E-8"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="10.1.003" expanded="true" height="103" name="Multiply (2)" width="90" x="849" y="187"/>
+      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes (4)" width="90" x="1117" y="544">
+        <parameter key="type" value="include attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="Address_is_res␞Freq␞last_update_days_ago"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="10.1.003" expanded="true" height="82" name="Apply Model (2)" width="90" x="1385" y="493">
         <list key="application_parameters"/>
       </operator>
-      <operator activated="true" class="performance_regression" compatibility="10.1.003" expanded="true" height="82" name="Performance" width="90" x="1385" y="85">
+      <operator activated="true" class="performance_regression" compatibility="10.1.003" expanded="true" height="82" name="Second Model Performance" width="90" x="1519" y="493">
+        <parameter key="main_criterion" value="first"/>
+        <parameter key="root_mean_squared_error" value="true"/>
+        <parameter key="absolute_error" value="false"/>
+        <parameter key="relative_error" value="false"/>
+        <parameter key="relative_error_lenient" value="false"/>
+        <parameter key="relative_error_strict" value="false"/>
+        <parameter key="normalized_absolute_error" value="false"/>
+        <parameter key="root_relative_squared_error" value="false"/>
+        <parameter key="squared_error" value="false"/>
+        <parameter key="correlation" value="false"/>
+        <parameter key="squared_correlation" value="false"/>
+        <parameter key="prediction_average" value="false"/>
+        <parameter key="spearman_rho" value="false"/>
+        <parameter key="kendall_tau" value="false"/>
+        <parameter key="skip_undefined_labels" value="true"/>
+        <parameter key="use_example_weights" value="true"/>
+      </operator>
+      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes (2)" width="90" x="1117" y="187">
+        <parameter key="type" value="include attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="Address_is_res␞Freq␞Gender=male␞last_update_days_ago␞US␞Web order␞Spending"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="10.1.003" expanded="true" height="82" name="Apply Model" width="90" x="1385" y="85">
+        <list key="application_parameters"/>
+      </operator>
+      <operator activated="true" class="performance_regression" compatibility="10.1.003" expanded="true" height="82" name="First Model Performance" width="90" x="1519" y="85">
         <parameter key="main_criterion" value="first"/>
         <parameter key="root_mean_squared_error" value="true"/>
         <parameter key="absolute_error" value="false"/>
@@ -115,17 +163,28 @@
       <connect from_op="Remove Unused Attribute" from_port="example set output" to_op="Set Role" to_port="example set input"/>
       <connect from_op="Set Role" from_port="example set output" to_op="Select Attributes" to_port="example set input"/>
       <connect from_op="Select Attributes" from_port="example set output" to_op="Train Set" to_port="example set input"/>
-      <connect from_op="Train Set" from_port="example set output" to_op="Select Attributes (3)" to_port="example set input"/>
+      <connect from_op="Train Set" from_port="example set output" to_op="Multiply" to_port="input"/>
       <connect from_op="Train Set" from_port="unmatched example set" to_op="Test Set" to_port="example set input"/>
-      <connect from_op="Test Set" from_port="example set output" to_op="Select Attributes (2)" to_port="example set input"/>
-      <connect from_op="Select Attributes (2)" from_port="example set output" to_op="Apply Model" to_port="unlabelled data"/>
+      <connect from_op="Multiply" from_port="output 1" to_op="Select Attributes (3)" to_port="example set input"/>
+      <connect from_op="Multiply" from_port="output 2" to_op="Select Attributes (5)" to_port="example set input"/>
+      <connect from_op="Test Set" from_port="example set output" to_op="Multiply (2)" to_port="input"/>
       <connect from_op="Select Attributes (3)" from_port="example set output" to_op="Linear Regression" to_port="training set"/>
       <connect from_op="Linear Regression" from_port="model" to_op="Apply Model" to_port="model"/>
-      <connect from_op="Apply Model" from_port="labelled data" to_op="Performance" to_port="labelled data"/>
-      <connect from_op="Performance" from_port="performance" to_port="result 1"/>
+      <connect from_op="Select Attributes (5)" from_port="example set output" to_op="Linear Regression (2)" to_port="training set"/>
+      <connect from_op="Linear Regression (2)" from_port="model" to_op="Apply Model (2)" to_port="model"/>
+      <connect from_op="Multiply (2)" from_port="output 1" to_op="Select Attributes (2)" to_port="example set input"/>
+      <connect from_op="Multiply (2)" from_port="output 2" to_op="Select Attributes (4)" to_port="example set input"/>
+      <connect from_op="Select Attributes (4)" from_port="example set output" to_op="Apply Model (2)" to_port="unlabelled data"/>
+      <connect from_op="Apply Model (2)" from_port="labelled data" to_op="Second Model Performance" to_port="labelled data"/>
+      <connect from_op="Second Model Performance" from_port="performance" to_port="result 2"/>
+      <connect from_op="Select Attributes (2)" from_port="example set output" to_op="Apply Model" to_port="unlabelled data"/>
+      <connect from_op="Apply Model" from_port="labelled data" to_op="First Model Performance" to_port="labelled data"/>
+      <connect from_op="First Model Performance" from_port="performance" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="109" resized="false" width="180" x="1075" y="278">First Model &amp;#11014;&amp;#11014;&amp;#11014;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Second Model &amp;#11015;&amp;#11015;&amp;#11015;</description>
     </process>
   </operator>
 </process>
