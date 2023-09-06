@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve student_profile" width="90" x="112" y="238">
+        <parameter key="repository_entry" value="//Local Repository/week8/student_profile"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve department_profile" width="90" x="112" y="340">
+        <parameter key="repository_entry" value="//Local Repository/week8/department_profile"/>
+      </operator>
+      <operator activated="true" class="concurrency:join" compatibility="10.1.003" expanded="true" height="82" name="Join Department ID" width="90" x="313" y="238">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="DEPARTMENT_ID" value="DEPARTMENT_ID"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve region_profile" width="90" x="447" y="289">
+        <parameter key="repository_entry" value="//Local Repository/week8/region_profile"/>
+      </operator>
+      <operator activated="true" class="concurrency:join" compatibility="10.1.003" expanded="true" height="82" name="Join Zip Code" width="90" x="581" y="238">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="ZIP_CODE" value="ZIP_CODE"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve student_grade" width="90" x="112" y="34">
+        <parameter key="repository_entry" value="student_grade"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve student_profile (2)" width="90" x="112" y="136">
+        <parameter key="repository_entry" value="student_profile"/>
+      </operator>
+      <operator activated="true" class="concurrency:join" compatibility="10.1.003" expanded="true" height="82" name="Join Student Grade" width="90" x="313" y="85">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="STUDENT_ID" value="STUDENT_ID"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="concurrency:join" compatibility="10.1.003" expanded="true" height="82" name="Join Data" width="90" x="715" y="187">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="STUDENT_ID" value="STUDENT_ID"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="blending:set_role" compatibility="10.1.003" expanded="true" height="82" name="Set Role" width="90" x="112" y="493">
+        <list key="set_roles">
+          <parameter key="STUDENT_ID" value="id"/>
+          <parameter key="DEPARTMENT_NAME" value="label"/>
+        </list>
+      </operator>
+      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Filter Graduate" width="90" x="246" y="493">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="STATUS.equals.G"/>
+        </list>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Filter New" width="90" x="380" y="544">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="STATUS.equals.N"/>
+        </list>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes (2)" width="90" x="514" y="544">
+        <parameter key="type" value="include attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="REGION␞GENDER␞AGE_1_YEAR␞DEPARTMENT_NAME␞GRADE_204111␞GRADE_204222␞GRADE_204333␞GRADE_204444␞GRADE_204555␞GRADE_204666"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Filter Good Grade" width="90" x="380" y="391">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="GPA.ge.3\.0"/>
+        </list>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="blending:select_attributes" compatibility="10.1.003" expanded="true" height="82" name="Select Attributes" width="90" x="514" y="391">
+        <parameter key="type" value="include attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="REGION␞GENDER␞AGE_1_YEAR␞DEPARTMENT_NAME␞GRADE_204111␞GRADE_204222␞GRADE_204333␞GRADE_204444␞GRADE_204555␞GRADE_204666"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="concurrency:cross_validation" compatibility="10.1.003" expanded="true" height="145" name="Cross Validation" width="90" x="648" y="391">
+        <parameter key="split_on_batch_attribute" value="false"/>
+        <parameter key="leave_one_out" value="false"/>
+        <parameter key="number_of_folds" value="10"/>
+        <parameter key="sampling_type" value="automatic"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+        <parameter key="enable_parallel_execution" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="10.1.003" expanded="true" height="103" name="Decision Tree" width="90" x="179" y="85">
+            <parameter key="criterion" value="gain_ratio"/>
+            <parameter key="maximal_depth" value="10"/>
+            <parameter key="apply_pruning" value="true"/>
+            <parameter key="confidence" value="0.1"/>
+            <parameter key="apply_prepruning" value="true"/>
+            <parameter key="minimal_gain" value="0.01"/>
+            <parameter key="minimal_leaf_size" value="2"/>
+            <parameter key="minimal_size_for_split" value="4"/>
+            <parameter key="number_of_prepruning_alternatives" value="3"/>
+          </operator>
+          <connect from_port="training set" to_op="Decision Tree" to_port="training set"/>
+          <connect from_op="Decision Tree" from_port="model" to_port="model"/>
+          <portSpacing port="source_training set" spacing="0"/>
+          <portSpacing port="sink_model" spacing="0"/>
+          <portSpacing port="sink_through 1" spacing="0"/>
+        </process>
+        <process expanded="true">
+          <operator activated="true" class="apply_model" compatibility="10.1.003" expanded="true" height="82" name="Apply Model (2)" width="90" x="112" y="34">
+            <list key="application_parameters"/>
+          </operator>
+          <operator activated="true" class="performance_classification" compatibility="10.1.003" expanded="true" height="82" name="Performance" width="90" x="246" y="34">
+            <parameter key="main_criterion" value="first"/>
+            <parameter key="accuracy" value="true"/>
+            <parameter key="classification_error" value="false"/>
+            <parameter key="kappa" value="false"/>
+            <parameter key="weighted_mean_recall" value="false"/>
+            <parameter key="weighted_mean_precision" value="false"/>
+            <parameter key="spearman_rho" value="false"/>
+            <parameter key="kendall_tau" value="false"/>
+            <parameter key="absolute_error" value="false"/>
+            <parameter key="relative_error" value="false"/>
+            <parameter key="relative_error_lenient" value="false"/>
+            <parameter key="relative_error_strict" value="false"/>
+            <parameter key="normalized_absolute_error" value="false"/>
+            <parameter key="root_mean_squared_error" value="false"/>
+            <parameter key="root_relative_squared_error" value="false"/>
+            <parameter key="squared_error" value="false"/>
+            <parameter key="correlation" value="false"/>
+            <parameter key="squared_correlation" value="false"/>
+            <parameter key="cross-entropy" value="false"/>
+            <parameter key="margin" value="false"/>
+            <parameter key="soft_margin_loss" value="false"/>
+            <parameter key="logistic_loss" value="false"/>
+            <parameter key="skip_undefined_labels" value="true"/>
+            <parameter key="use_example_weights" value="true"/>
+            <list key="class_weights"/>
+          </operator>
+          <connect from_port="model" to_op="Apply Model (2)" to_port="model"/>
+          <connect from_port="test set" to_op="Apply Model (2)" to_port="unlabelled data"/>
+          <connect from_op="Apply Model (2)" from_port="labelled data" to_op="Performance" to_port="labelled data"/>
+          <connect from_op="Performance" from_port="performance" to_port="performance 1"/>
+          <portSpacing port="source_model" spacing="0"/>
+          <portSpacing port="source_test set" spacing="0"/>
+          <portSpacing port="source_through 1" spacing="0"/>
+          <portSpacing port="sink_test set results" spacing="0"/>
+          <portSpacing port="sink_performance 1" spacing="0"/>
+          <portSpacing port="sink_performance 2" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="10.1.003" expanded="true" height="82" name="Apply Model" width="90" x="782" y="544">
+        <list key="application_parameters"/>
+      </operator>
+      <operator activated="true" class="performance_classification" compatibility="10.1.003" expanded="true" height="82" name="Performance (2)" width="90" x="782" y="391">
+        <parameter key="main_criterion" value="first"/>
+        <parameter key="accuracy" value="true"/>
+        <parameter key="classification_error" value="false"/>
+        <parameter key="kappa" value="false"/>
+        <parameter key="weighted_mean_recall" value="false"/>
+        <parameter key="weighted_mean_precision" value="false"/>
+        <parameter key="spearman_rho" value="false"/>
+        <parameter key="kendall_tau" value="false"/>
+        <parameter key="absolute_error" value="false"/>
+        <parameter key="relative_error" value="false"/>
+        <parameter key="relative_error_lenient" value="false"/>
+        <parameter key="relative_error_strict" value="false"/>
+        <parameter key="normalized_absolute_error" value="false"/>
+        <parameter key="root_mean_squared_error" value="false"/>
+        <parameter key="root_relative_squared_error" value="false"/>
+        <parameter key="squared_error" value="false"/>
+        <parameter key="correlation" value="false"/>
+        <parameter key="squared_correlation" value="false"/>
+        <parameter key="cross-entropy" value="false"/>
+        <parameter key="margin" value="false"/>
+        <parameter key="soft_margin_loss" value="false"/>
+        <parameter key="logistic_loss" value="false"/>
+        <parameter key="skip_undefined_labels" value="true"/>
+        <parameter key="use_example_weights" value="true"/>
+        <list key="class_weights"/>
+      </operator>
+      <connect from_op="Retrieve student_profile" from_port="output" to_op="Join Department ID" to_port="left"/>
+      <connect from_op="Retrieve department_profile" from_port="output" to_op="Join Department ID" to_port="right"/>
+      <connect from_op="Join Department ID" from_port="join" to_op="Join Zip Code" to_port="left"/>
+      <connect from_op="Retrieve region_profile" from_port="output" to_op="Join Zip Code" to_port="right"/>
+      <connect from_op="Join Zip Code" from_port="join" to_op="Join Data" to_port="right"/>
+      <connect from_op="Retrieve student_grade" from_port="output" to_op="Join Student Grade" to_port="left"/>
+      <connect from_op="Retrieve student_profile (2)" from_port="output" to_op="Join Student Grade" to_port="right"/>
+      <connect from_op="Join Student Grade" from_port="join" to_op="Join Data" to_port="left"/>
+      <connect from_op="Join Data" from_port="join" to_op="Set Role" to_port="example set input"/>
+      <connect from_op="Set Role" from_port="example set output" to_op="Filter Graduate" to_port="example set input"/>
+      <connect from_op="Filter Graduate" from_port="example set output" to_op="Filter Good Grade" to_port="example set input"/>
+      <connect from_op="Filter Graduate" from_port="unmatched example set" to_op="Filter New" to_port="example set input"/>
+      <connect from_op="Filter New" from_port="example set output" to_op="Select Attributes (2)" to_port="example set input"/>
+      <connect from_op="Select Attributes (2)" from_port="example set output" to_op="Apply Model" to_port="unlabelled data"/>
+      <connect from_op="Filter Good Grade" from_port="example set output" to_op="Select Attributes" to_port="example set input"/>
+      <connect from_op="Select Attributes" from_port="example set output" to_op="Cross Validation" to_port="example set"/>
+      <connect from_op="Cross Validation" from_port="model" to_op="Apply Model" to_port="model"/>
+      <connect from_op="Apply Model" from_port="labelled data" to_op="Performance (2)" to_port="labelled data"/>
+      <connect from_op="Performance (2)" from_port="performance" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>
