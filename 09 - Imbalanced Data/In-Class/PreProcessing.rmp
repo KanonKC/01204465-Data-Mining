@@ -13,9 +13,9 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve StudentProfile" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/01204465-Data-Mining/09 - Imbalanced Data/In-Class/resources/StudentProfile"/>
+        <parameter key="repository_entry" value="resources/StudentProfile"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Filter Examples" width="90" x="313" y="34">
+      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Graduated" width="90" x="313" y="34">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -25,7 +25,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Filter Examples (2)" width="90" x="514" y="34">
+      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="GPA &gt;= 3.00 ?" width="90" x="514" y="34">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -35,11 +35,11 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve StudentProfile (2)" width="90" x="45" y="187">
-        <parameter key="repository_entry" value="//Local Repository/01204465-Data-Mining/09 - Imbalanced Data/In-Class/resources/StudentProfile"/>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve StudentProfile (2)" width="90" x="45" y="238">
+        <parameter key="repository_entry" value="resources/StudentProfile"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve DepartmentProfile" width="90" x="45" y="340">
-        <parameter key="repository_entry" value="//Local Repository/01204465-Data-Mining/09 - Imbalanced Data/In-Class/resources/DepartmentProfile"/>
+        <parameter key="repository_entry" value="resources/DepartmentProfile"/>
       </operator>
       <operator activated="true" class="concurrency:join" compatibility="10.1.003" expanded="true" height="82" name="Join" width="90" x="246" y="238">
         <parameter key="remove_double_attributes" value="true"/>
@@ -50,7 +50,7 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Filter Examples (3)" width="90" x="447" y="238">
+      <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Good Graduated" width="90" x="447" y="238">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -61,8 +61,8 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve StudentProfile (3)" width="90" x="313" y="442">
-        <parameter key="repository_entry" value="//Local Repository/01204465-Data-Mining/09 - Imbalanced Data/In-Class/resources/StudentProfile"/>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve StudentProfile (3)" width="90" x="45" y="442">
+        <parameter key="repository_entry" value="resources/StudentProfile"/>
       </operator>
       <operator activated="true" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Filter New Students" width="90" x="514" y="442">
         <parameter key="parameter_expression" value=""/>
@@ -74,14 +74,14 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <connect from_op="Retrieve StudentProfile" from_port="output" to_op="Filter Examples" to_port="example set input"/>
-      <connect from_op="Filter Examples" from_port="example set output" to_op="Filter Examples (2)" to_port="example set input"/>
-      <connect from_op="Filter Examples (2)" from_port="example set output" to_port="result 1"/>
-      <connect from_op="Filter Examples (2)" from_port="unmatched example set" to_port="result 2"/>
+      <connect from_op="Retrieve StudentProfile" from_port="output" to_op="Graduated" to_port="example set input"/>
+      <connect from_op="Graduated" from_port="example set output" to_op="GPA &gt;= 3.00 ?" to_port="example set input"/>
+      <connect from_op="GPA &gt;= 3.00 ?" from_port="example set output" to_port="result 1"/>
+      <connect from_op="GPA &gt;= 3.00 ?" from_port="unmatched example set" to_port="result 2"/>
       <connect from_op="Retrieve StudentProfile (2)" from_port="output" to_op="Join" to_port="left"/>
       <connect from_op="Retrieve DepartmentProfile" from_port="output" to_op="Join" to_port="right"/>
-      <connect from_op="Join" from_port="join" to_op="Filter Examples (3)" to_port="example set input"/>
-      <connect from_op="Filter Examples (3)" from_port="example set output" to_port="result 3"/>
+      <connect from_op="Join" from_port="join" to_op="Good Graduated" to_port="example set input"/>
+      <connect from_op="Good Graduated" from_port="example set output" to_port="result 3"/>
       <connect from_op="Retrieve StudentProfile (3)" from_port="output" to_op="Filter New Students" to_port="example set input"/>
       <connect from_op="Filter New Students" from_port="example set output" to_port="result 4"/>
       <portSpacing port="source_input 1" spacing="0"/>
@@ -90,6 +90,9 @@
       <portSpacing port="sink_result 3" spacing="0"/>
       <portSpacing port="sink_result 4" spacing="0"/>
       <portSpacing port="sink_result 5" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="177" resized="true" width="678" x="10" y="10">&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; Q1, Q2</description>
+      <description align="center" color="green" colored="true" height="203" resized="true" width="680" x="10" y="217">&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; Q3, Q4</description>
+      <description align="center" color="blue" colored="true" height="141" resized="true" width="680" x="10" y="429">&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; Q5&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Q3, Q4</description>
     </process>
   </operator>
 </process>
